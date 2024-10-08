@@ -1,4 +1,4 @@
-
+Vstupní dotazník: https://docs.google.com/forms/d/1eaMXRBgESIev0eKswukVPloD1z7VnMJ50mHgOB56OfI
 # Lektor: Petr Rozkošný
 (petr.rozkosny@ictpro.cz, https://www.linkedin.com/in/rozkosny/)
 Tel. 731 162 655
