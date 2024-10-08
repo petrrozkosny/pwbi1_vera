@@ -1,0 +1,36 @@
+
+
+-- ==================== CVICENI FILTER ============================
+MEASURE data[cv01 suma srazek mesic 1] = SUMX(FILTER(data,data[mesic] = 1),data[srazky])
+MEASURE data[cv02 suma srazek ruzyne] = SUMX(FILTER(data,data[lokalita] = "RUZYNE"),data[srazky])
+MEASURE data[cv03 suma srazek ruzyne mesic 1] = SUMX(FILTER(data,data[lokalita] = "RUZYNE" && data[mesic] = 1),data[srazky])
+MEASURE data[cv04 suma srazek mesic 1 2] = SUMX(FILTER(data,data[mesic] = 1 && data[mesic] = 2),data[srazky])
+MEASURE data[cv05 suma srazek posledni mesic] = SUMX(FILTER(data,data[mesic] =MAX(data[mesic])),data[srazky])
+
+-- ==================== CVICENI FILTER ALL ============================
+
+MEASURE data[cv06 suma srazek predchozi rok] = SUMX(FILTER(ALL(data), data[rok] = MAX(data[rok])-1),data[srazky])
+MEASURE data[cv07 suma srazek predchozi rok mesic 1] = SUMX(FILTER(ALL(data), data[rok] = MAX(data[rok])-1 && data[mesic] = 1),data[srazky])
+MEASURE data[cv08 suma srazek predchozi rok posledni mesic] = SUMX(FILTER(ALL(data), data[rok] = MAX(data[rok])-1 && data[mesic] = MAX(data[mesic])),data[srazky])
+MEASURE data[cv09 suma srazek predchozi rok ruzyne] = SUMX(FILTER(ALL(data), data[rok] = MAX(data[rok])-1 && data[lokalita] = "RUZYNE"),data[srazky])
+
+-- =============== CVICENI1 DEN2 SUMX FILTER ==========================
+-- tabulka se sloupcem data[lokalita]
+MEASURE data[cv10 suma srazek] = SUM(data[srazky])
+MEASURE data[cv11 suma srazek rok 2020] = SUMX(FILTER(data,data[rok] = 2000),data[srazky])
+MEASURE data[cv12 suma srazek rok 2020 mesic 1] = SUMX(FILTER(data,data[rok] = 2020 && data[mesic] = 1),data[srazky])
+MEASURE data[cv13 suma srazek maximalni rok] = SUMX(FILTER(data,data[rok] = MAX(data[rok])),data[srazky])
+
+-- =============== CVICENI1 DEN2 SUMX FILTER ALL ==========================
+-- tabulka se sloupci data[rok],data[mesic]
+
+MEASURE data[cv14 suma srazek predchozi rok] = SUMX(FILTER(ALL(data),data[rok] = MAX(data[rok])-1),data[srazky])
+MEASURE data[cv15 suma srazek kumulativne] = SUMX(FILTER(ALL(data),data[rok] = MAX(data[rok]) && data[mesic] <=MAX(data[mesic])),data[srazky])
+
+
+
+
+
+
+
+

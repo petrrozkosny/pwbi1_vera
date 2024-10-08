@@ -1,0 +1,11 @@
+let
+    // data stazena z github
+    Zdroj = Excel.Workbook(File.Contents("C:\Users\Student\Downloads\data.xlsx"), null, true),
+    data1_Sheet = Zdroj{[Item="data1",Kind="Sheet"]}[Data],
+    #"Záhlaví se zvýšenou úrovní" = Table.PromoteHeaders(data1_Sheet, [PromoteAllScalars=true]),
+    #"Odebrané ostatní sloupce" = Table.SelectColumns(#"Záhlaví se zvýšenou úrovní",{"lokalita", "datum", "srazky", "snih"}),
+    #"Změněný typ" = Table.TransformColumnTypes(#"Odebrané ostatní sloupce",{{"lokalita", type text}, {"datum", type date}, {"srazky", type number}, {"snih", type number}}),
+    #"Vložené: Rok" = Table.AddColumn(#"Změněný typ", "rok", each Date.Year([datum]), Int64.Type),
+    #"Podmíněný sloupec je přidaný" = Table.AddColumn(#"Vložené: Rok", "typ_srazek", each if [srazky] = null then "nevyplneno" else if [srazky] = 0 then "neprselo" else "prselo", type text)
+in
+    #"Podmíněný sloupec je přidaný"
