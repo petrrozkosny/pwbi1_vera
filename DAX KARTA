@@ -1,0 +1,13 @@
+31 srazky mezirocne karta = 
+VAR sipka_nahoru  = UNICHAR(9650)
+VAR sipka_dolu = UNICHAR(9660)
+VAR _srazky = SUM(data[srazky])
+VAR _srazky_minuly_rok = SUMX(FILTER(ALL(data),data[rok] = SELECTEDVALUE(data[rok]) - 1 && data[lokalita] = SELECTEDVALUE(data[lokalita])),data[srazky])
+
+VAR srazky_rozdil_abs = ROUND(_srazky - _srazky_minuly_rok,2)
+VAR srazky_rozdil_pct = FORMAT((_srazky / _srazky_minuly_rok-1) ,"percent")
+
+return
+IF(
+    srazky_rozdil_abs <0,sipka_dolu,sipka_nahoru)
+    &" "&srazky_rozdil_abs&" ("&srazky_rozdil_pct&")"
