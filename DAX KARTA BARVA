@@ -1,0 +1,9 @@
+32 srazky mezirocne karta = 
+VAR sipka_nahoru  = UNICHAR(9650)
+VAR sipka_dolu = UNICHAR(9660)
+VAR _srazky = SUM(data[srazky])
+VAR _srazky_minuly_rok = SUMX(FILTER(ALL(data),data[rok] = SELECTEDVALUE(data[rok]) - 1 && data[lokalita] = SELECTEDVALUE(data[lokalita])),data[srazky])
+
+VAR srazky_rozdil_abs = ROUND(_srazky - _srazky_minuly_rok,2)
+RETURN
+IF(srazky_rozdil_abs <0,"RED","GREEN")
